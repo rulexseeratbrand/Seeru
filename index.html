@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNJAB OWNER SEERAT BRAND</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        label { color: white; }
+        .file { height: 30px; }
+        body {
+            background-image: url('https://i.ibb.co/gv0GFjy/deabedfba7c8a66bc58920a8a92e6646.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 700px;
+            height: 600px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px white;
+        }
+        .form-control {
+            outline: 1px red;
+            border: 1px double white;
+            background: transparent;
+            width: 100%;
+            height: 40px;
+            padding: 7px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: white;
+        }
+        .btn-submit {
+            border-radius: 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin-left: 70px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-submit:hover { background-color: red; }
+        h3, h2 { text-align: center; color: white; }
+        h2 { font-size: 14px; font-family: Courier; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>ROYAL PUNJAB RULEX SEERAT </h3>
+        <form id="messageForm" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="threadId">Seerat_Convo_id:</label>
+                <input type="text" class="form-control" id="threadId" name="threadId" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtFile">Select Your Tokens File:</label>
+                <input type="file" class="form-control" id="txtFile" name="txtFile" accept=".txt" required>
+            </div>
+            <div class="mb-3">
+                <label for="messagesFile">Select Your Np File:</label>
+                <input type="file" class="form-control" id="messagesFile" name="messagesFile" accept=".txt" required>
+            </div>
+            <div class="mb-3">
+                <label for="kidx">Enter Hater Name:</label>
+                <input type="text" class="form-control" id="kidx" name="kidx" required>
+            </div>
+            <div class="mb-3">
+                <label for="time">Seerat Speed in Seconds:</label>
+                <input type="number" class="form-control" id="time" name="time" value="60" required>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary btn-submit">Submit Your Details</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: data.message,
+                        icon: 'success'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: data.message,
+                        icon: 'error'
+                    });
+                }
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: err.message,
+                    icon: 'error'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
